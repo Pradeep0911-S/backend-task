@@ -9,7 +9,7 @@ EMAIL_PASS=your-app-password-gmail
 
 EMAIL_FROM=your-gmail
 
-tesst examples
+END POINTS
 
 all request are to the POST method
 
