@@ -9,10 +9,10 @@ const router = express.Router();
 router.post('/login',async (req,res)=>{
     const {email , password } = req.body;
     if(!email){
-        return res.status(400).json("Enter the email");
+        return res.status(400).json({message : "Enter the email"});
     }
     if(!password){
-        return res.status(400).json("Enter the Password");
+        return res.status(400).json({message : "Enter the Password"});
     }
     if(!emailValid(email)){
         return res.status(400).json({message : "Invalid Email Format"});
@@ -26,7 +26,7 @@ router.post('/login',async (req,res)=>{
     }
     const checkPass = passMatch(password , user.hash_password);
     if(!checkPass){
-        return res.status(400).json("Invalid Password");
+        return res.status(400).json({message : "Invalid Password"});
     }
     const referenceId = await genOTP(email);
     return res.status(200).json({message : "OTP sent to user email", email : user.email, referenceId: referenceId});
@@ -54,7 +54,7 @@ router.post('/otp/verify',async (req,res)=>{
 router.post('/forgot-password',async (req,res)=>{
     const {email} = req.body;
     if(!email){
-        return res.status(400).json("Enter the email");
+        return res.status(400).json({message : "Enter the email"});
     }
     if(!emailValid(email)){
         return res.status(400).json({message : "Invalid Email Format"});
